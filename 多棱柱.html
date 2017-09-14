@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/photo.css"/>
+	</head>
+
+	<body>
+		<div id="wrap">
+			<div class="box">
+
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		window.onload = function() {
+			createLZ(12);
+
+			function createLZ(n) {
+				/*获取要旋转的盒子*/
+				var boxNode = document.querySelector("#wrap .box");
+				var styleNode=document.createElement("style");
+				var divText = "";
+				var styleText="";
+				/*改变每一面以及整体旋转盒子的基点   改变每一面的基点是为了让每一个面沿着基点旋转折成盒子  改变整体盒子基点是为了让盒子产生更好的旋转效果*/
+				var  z=-(boxNode.offsetWidth/2)*Math.tan((180-360/n)/2*Math.PI/180).toFixed(4);
+				/*循环生成盒子的多个面         使其进行不同的旋转折成盒子*/
+				for(var i = 0; i < n; i++) {
+					divText += "<div></div>"
+					/*旋转的是外角的度数*/
+					styleText+="#wrap .box > div:nth-child("+(i+1)+"){transform:rotateY("+(360/n)*i+"deg);background:url(img/"+"0"+(i+1)+".jpg) no-repeat;}";
+				}
+				/*改变每个面的基点和整个盒子的基点*/
+				styleText+="#wrap .box>div{transform-origin: center center "+z+"px;}"
+				styleText+="#wrap .box{transform-origin: center center "+z+"px;}"
+				boxNode.innerHTML = divText;
+				styleNode.innerHTML=styleText;
+				document.head.appendChild(styleNode);
+			}
+		}
+	</script>
+
+</html>

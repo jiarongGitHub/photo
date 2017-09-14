@@ -1,0 +1,46 @@
+@w:130px;
+@h:130px;
+* {
+    margin: 0;
+    padding: 0;
+}
+/*外层包裹区域*/
+#wrap {
+    background: rgba(0,0,0,1);
+    width: @w;
+    height: @h;
+    padding: 130px;
+    margin: 150px auto;
+    perspective: 300px;
+    &:hover {
+        cursor: pointer;
+    }
+    /*立体盒子*/
+    .box {
+        transform-style: preserve-3d;
+        position: relative;
+        width: @w;
+        height: @h;
+        /*transition: 8s transform linear;*/
+        animation: move 15s infinite linear;
+        /*盒子每一个面*/
+        div {
+            position: absolute;
+            width: @w;
+            height: @h;
+            line-height: 130px;
+            text-align: center;
+        }
+    }
+}
+@keyframes move {
+    0% {
+        transform: rotateY(0deg) rotateX(0deg);
+    }
+    50% {
+        transform: rotateY(360deg) rotateX(-30deg);
+    }
+    100% {
+        transform: rotateY(720deg) rotateX(0deg);
+    }
+}
